@@ -1,0 +1,170 @@
+﻿@model WebEstacionamentoTcc20.Models.Empresa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Empresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RazaoSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RazaoSocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeFantasia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeFantasia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cpf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cpf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cnpj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NVagas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NVagas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NDispo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NDispo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Horafi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Horafi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Horai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Horai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qui)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qui)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sab)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sab)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmpresaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

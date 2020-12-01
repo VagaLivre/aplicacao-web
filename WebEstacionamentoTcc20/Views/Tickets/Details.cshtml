@@ -1,0 +1,106 @@
+﻿@model WebEstacionamentoTcc20.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresa.RazaoSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresa.RazaoSocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Check_in)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Check_in)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Check_out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Check_out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Check_in)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Check_in)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Check_out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Check_out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalHoras)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalHoras)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorPorHora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorPorHora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorTotal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTicket }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

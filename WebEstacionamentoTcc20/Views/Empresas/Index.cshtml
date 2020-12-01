@@ -1,0 +1,96 @@
+﻿@model  List<WebEstacionamentoTcc20.Models.Empresa.EmpresaDisplayViewModel>
+
+@{
+    ViewBag.Title = "Estacionamentos";
+}
+
+<h2>Lista de Estacionamentos</h2>
+
+<div class="row container">
+    <div class="container">
+        <div id="addEmpresa" class="col-md-4 col-xs-12">
+            <label class="control-label">Adicionar Empresa</label>
+            <button type="button" onclick="location.href='@Url.Action("Create","Empresas")'" class="btn btn-success col-md-offset-1">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </button>
+        </div>
+        <div class="visible-xs-block visible-sm"><hr /></div>
+        <div id="pesquisaDiv" class="col-md-8 col-sm-8  col-xs-12 row container">
+            <p class="col-md-3 col-sm-4 col-xs-12">
+                <b>Pesquisar Por:</b>
+            </p>
+            <div class="row col-md-8 col-sm-8">
+                <div class="col-md-3 col-sm-5  col-xs-12 radio-inline" style="margin-left:10px;">
+                    @Html.RadioButton("searchBy", "Todos", true, new { @id = "rbTodos" })<text>Todos</text>
+                </div>
+                <div class="col-md-3 col-sm-5 col-xs-12 radio-inline">
+                    @Html.RadioButton("searchBy", "Local", false, new { @id = "rbLocal" })<text>Local</text>
+                </div>
+            </div>
+            <div class="col-md-9 col-md-offset-3 col-sm-12 col-sm-offset-0">
+                <div class="input-group">
+                    <input type="text" id="tbSearch" class="form-control" style="max-width:100%;" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-info" id="btnPesq">
+                            <span class="glyphicon glyphicon-search">&nbsp;</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <br /><br />
+
+
+    <div id="listaEstacio">
+        @{Html.RenderPartial("_List", Model);}
+    </div>
+
+</div>
+
+
+@section Scripts{
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(inicializaComponentes);
+        function inicializaComponentes()
+        {
+            $("#btnPesq").click(pesquisar);
+
+        }
+
+        function pesquisar() {
+            var tipoBusca = $("input[type='radio'][name='searchBy']:checked").val();
+            var textoBusca = $("input[type='text']#tbSearch").val();
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("Pesquisar", "Empresas")",
+                dataType: "text",
+                data: { searchBy: tipoBusca, search: textoBusca },
+                beforeSend: function () {
+                    $("#btnPesq").prop('disabled', true);
+                    $("#trLoadingResults").show();
+                },
+                complete: function () {
+                },
+                success: function (response) {
+                },
+                error: function (response) {
+                }
+            }).done(function (result) {
+                $("#listaEstacio").html(result);
+                $("#btnPesq").prop('disabled', false);
+                $("#trLoadingResults").hide();
+            });
+            return false;
+        }
+
+    </script>
+}
+
+
+

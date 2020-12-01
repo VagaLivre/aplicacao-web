@@ -1,0 +1,312 @@
+﻿@model WebEstacionamentoTcc20.Models.Empresa
+
+@{
+    ViewBag.Title = "Cadastro Estacionamento";
+}
+
+
+<h2><center>Cadastro de Estacionamento</center></h2><br /><br />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label for="inputTipo">Tipo</label>
+                <select id="inputTipo" class="form-control">
+                    <option selected>SELECIONAR</option>
+                    <option>Juridica</option>
+                    <option>Fisica</option>
+                </select>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group col-md-5">
+                <label for="inputCity">Razão Social</label>
+                @Html.EditorFor(model => model.RazaoSocial, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RazaoSocial, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-5">
+                <label for="inputCity">Nome Fantasia</label>
+                @Html.EditorFor(model => model.NomeFantasia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeFantasia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="inputCity">CNPJ</label>
+                @Html.EditorFor(model => model.Cnpj, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cnpj, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Data de Cadastro</label>
+                @Html.EditorFor(model => model.Cnpj, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cnpj, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <h4><center>Cadastro de Estacionamento</center></h4><hr />
+
+        <div class="row">
+            <div class="form-group col-md-3">
+
+                <form id="location-form">
+                    <label for="exampleInputEndereco">Busca Endereco</label>
+                    <input type="text" id="enderec" class="form-control" placeholder="Rua + Cidade">
+
+                </form>
+                <input id="submit" type="button" value="Localizar Endereco" onclick="ExibirLocalizacao()">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="exampleInputCidade">Enderco</label>
+                <input type="text" id="location-end" class="form-control" placeholder="Endereco Completo">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="exampleInputCidade">Cidade</label>
+                <input type="text" id="location-cidade" class="form-control" placeholder="Cidade">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="exampleInputUF">UF</label>
+                <input type="text" id="location-uf" class="form-control" placeholder="UF">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="exampleInputCep">CEP</label>
+                <input type="text" id="location-cep" class="form-control" placeholder="CEP">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+
+
+                <label for="exampleInputLongetude">Longitude</label>
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", id = "location-lat" }, placeholder = "Longetude" })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+
+
+            </div>
+            <div class="form-group col-md-4">
+                <label for="exampleInputLatetude">Latetude</label>
+                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", id = "location-long" }, placeholder = "Longetude" })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+
+            </div>
+        </div><br />
+    </div>
+    <h4><center>Informações do Estacionamento</center></h4><hr />
+    <div class="form-row">
+        <div class="form-group col-md-1">
+
+
+            <label>Horario Abertura</label><br />
+            @Html.EditorFor(model => model.Horai, new { htmlAttributes = new { @type = "time" } })
+            @Html.ValidationMessageFor(model => model.Horai, "", new { @type = "text-danger" })
+
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-1">
+
+            <label>Horario Abertura</label><br />
+            @Html.EditorFor(model => model.Horafi, new { htmlAttributes = new { @type = "time" } })
+            @Html.ValidationMessageFor(model => model.Horafi, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label>Dias de Funcionamento</label><br />
+            <label class="checkbox-inline">
+                @Html.EditorFor(model => model.Seg)
+                @Html.ValidationMessageFor(model => model.Seg, "", new { @class = "text-danger" }) SEG
+            </label>
+
+            <label class="checkbox-inline">
+                @Html.EditorFor(model => model.TER)
+                @Html.ValidationMessageFor(model => model.TER, "", new { @class = "text-danger" }) TER
+            </label>
+            <label class="checkbox-inline">
+                @Html.EditorFor(model => model.Qua)
+                @Html.ValidationMessageFor(model => model.Qua, "", new { @class = "text-danger" })QUARTA
+            </label>
+            <label class="checkbox-inline">
+                @Html.EditorFor(model => model.Qui)
+                @Html.ValidationMessageFor(model => model.Qui, "", new { @class = "text-danger" })Quinta
+            </label><br />
+            <label class="checkbox-inline">
+                @Html.EditorFor(model => model.Sex)
+                @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" }) SEXTA
+            </label>
+            <label class="checkbox-inline">
+                @Html.EditorFor(model => model.Sab)
+                @Html.ValidationMessageFor(model => model.Sab, "", new { @class = "text-danger" }) SABADO
+            </label>
+            <label class="checkbox-inline">
+                @Html.EditorFor(model => model.Dom)
+                @Html.ValidationMessageFor(model => model.Dom, "", new { @class = "text-danger" }) DOMINGO
+            </label>
+        </div>
+
+
+
+
+
+
+
+        <div class="form-group col-md-2">
+            <label for="inputPreco">Preco(R$):</label>
+            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Valor, "", new { @type = "text-danger" })
+
+
+        </div>
+        <div class="form-group col-md-2">
+
+            <label for="inputVagas">Nº de vagas</label>
+            @Html.EditorFor(model => model.NVagas, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NVagas, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group col-md-2">
+
+            <label for="inputVagas">Nº de  disponivel</label>
+            @Html.EditorFor(model => model.NDispo, new { htmlAttributes = new { @class = "form-control", id = "inputVagas" } })
+            @Html.ValidationMessageFor(model => model.NDispo, "", new { @class = "text-danger" })
+
+
+        </div>
+    </div><br /><br /><br /><br /> <hr />
+    <h4><center>Opções</center></h4>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            <input type="submit" value="Gravar" class="btn btn-primary" />
+            <a href="@Url.Action("Index","Empresas")" class="btn btn-danger">Voltar</a>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+
+    function ExibirLocalizacao() {
+        // Prevent actual submit
+
+
+        var location = document.getElementById('enderec').value;
+
+
+
+
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: location,
+                key: 'AIzaSyD-X3WJy7xV7KPsDrf8720PA9V5CqsSrwU'
+            }
+        })
+            .then(function (response) {
+                // Log full response
+                console.log(response);
+                var lat = response.data.results[0].geometry.location.lat;
+                var lng = response.data.results[0].geometry.location.lng;
+
+                var cidade = response.data.results[0].address_components[1].long_name;
+                var uf = response.data.results[0].address_components[2].long_name;
+                var cep = response.data.results[0].address_components[4].long_name;
+                var end = response.data.results[0].formattedAddress;
+
+
+                document.getElementById('location-lat').value = lat;
+                document.getElementById('location-long').value = lng;
+
+                document.getElementById('location-cidade').value = cidade;
+                document.getElementById('location-uf').value = uf;
+                document.getElementById('location-cep').value = cep;
+                document.getElementById('location-end').value = end;
+
+
+                // Formatted Address
+                var formattedAddress = response.data.results[0].formatted_address;
+                var formattedAddressOutput = `
+                      <ul class="list-group">
+                        <li class="list-group-item">${formattedAddress}</li>
+                      </ul>
+                    `; console.log("Passou 228");
+
+                // Address Components
+                var addressComponents = response.data.results[0].address_components;
+                var addressComponentsOutput = '<ul class="list-group">';
+                for (var i = 0; i < addressComponents.length; i++) {
+                    addressComponentsOutput += `
+                        <li class="list-group-item"><strong>${addressComponents[i].types[0]}</strong>: ${addressComponents[i].long_name}</li>
+                      `;
+                } console.log("Passou 237");
+                addressComponentsOutput += '</ul>';
+
+                // Geometry
+
+                var geometryOutput = `
+                      <ul class="list-group">
+                        <li class="list-group-item"><strong>Latitude</strong>: ${lat}</li>
+                        <li class="list-group-item"><strong>Longitude</strong>: ${lng}</li>
+                      </ul>
+                    `;
+
+                console.log("Passou 249");
+                //sem informação geral  document.getElementById('formatted-address').value = lat;
+
+
+                // Output to app
+                //  document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
+                //   document.getElementById('address-components').innerHTML = addressComponentsOutput;
+                //    document.getElementById('geometry').innerHTML = geometryOutput;
+
+
+
+
+
+                console.log("Passou 215");
+            })
+            .catch(function (error) {
+                console.log(error);
+                console.log("Nao localizou");
+                swal({
+                    title: "Atenção!",
+                    text: "Endereco pesquisado não encontrado !",
+                    icon: "warning",
+                    button: "Fechar",
+                })
+            });
+
+
+
+
+
+
+
+
+
+    }
+
+
+</script>

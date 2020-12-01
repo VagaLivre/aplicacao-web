@@ -1,0 +1,45 @@
+﻿@model WebEstacionamentoTcc20.Models.Empresa
+
+
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Deletar</h2>
+<div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Deseja deletar este Empresa ?</h4>
+            </div>
+            <div class="modal-body">
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayName("Código")</dt>
+                    <dd>@Html.DisplayFor(model => model.EmpresaId)</dd>
+                    <dt>@Html.DisplayName("Nome Estacioanmento")</dt>
+                    <dd>@Html.DisplayFor(model => model.NomeFantasia)</dd>
+                    <dt>@Html.DisplayName("Endereco")</dt>
+                    <dd>@Html.DisplayFor(model => model.Endereco)</dd>
+                    <dt>@Html.DisplayName("Numero de Vagas")</dt>
+                    <dd>@Html.DisplayFor(model => model.NVagas)</dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <input type="submit" value="Deletar" class="btn btn-succcess" />
+                    <a href="@Url.Action("Index","Empresas")" class="btn btn-danger">Voltar</a>
+                </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    <div>
+        @Html.ActionLink("Retornar para a Lista", "Index")
+    </div>
+</div>

@@ -1,0 +1,158 @@
+﻿@model List<WebEstacionamentoTcc20.Models.Usuario.UsuarioDisplayViewModel>
+<div style="position:relative;">
+    <table id="tableListEventos" class="table table-responsive  table-striped table-hover" style="border-bottom:0;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Codigo")
+                </th>
+                <th>
+                    @Html.DisplayName("Nome")
+                </th>
+                <th>
+                    @Html.DisplayName("Endereco")
+                </th>
+                <th>
+                    @Html.DisplayName("Telefone")
+                </th>
+
+                <th>
+                    @Html.DisplayName("Usuario App")
+                </th>
+                <th>
+                    @Html.DisplayName("Usuario Estacionamento")
+                </th>
+                <th>
+                    @Html.DisplayName("FOTO")
+                </th>
+
+
+
+                <th style="width:5%;">Editar</th>
+                <th style="width:5%;">Remover</th>
+            </tr>
+        </thead>
+        @if (Model == null || Model.Count == 0)
+        {
+            <tbody>
+                <tr class="tableDataDisplay" id="noDataToDisplayInTable">
+                    <td colspan="2">Nenhum resultado para o registro pesquisado.</td>
+                </tr>
+            </tbody>
+
+        }
+        else
+        {
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                <tr class="tableDataDisplay">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Endereco)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UsuarioApp)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UsuarioEst)
+                    </td>
+                    @if (!string.IsNullOrEmpty(item.Photo))
+                    {
+                        <img src="@Url.Content(item.Photo)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                    }
+
+
+                    <td style="max-width:5%;">
+                        <a href="@Url.Action("Edit", "Usuarios", new { id = item.UserId})" title="Editar">
+                            <span class="glyphicon glyphicon-pencil center-block text-center" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                    <td style="max-width:5%;">
+                        <a href="@Url.Action("Delete", "Usuarios", new { id = item.UserId})" title="Remover">
+                            <span class="glyphicon glyphicon-remove-circle center-block text-center" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+                }
+                @*<tr>
+                        <td colspan="3" id="trLoadingResults" style="border-style:hidden;" hidden>
+                            <img src="~/Content/images/ajax-loader.gif" class="img-responsive imagemLoading" alt="Carregando Registros..." />
+                        </td>
+                    </tr>*@
+            </tbody>
+            @*<tfoot style="border-style:hidden;">
+                    <tr class="no-border">
+                        <td colspan="3" id="PagerTableData" class="no-border">
+                            @Html.PagedListPager(Model, page => Url.Action("Pesquisar", new { page, searchBy = @ViewBag.searchBy, search = @ViewBag.search }), (PagedListRenderOptions)ViewBag.pLRO)
+                        </td>
+                    </tr>
+                </tfoot>*@
+
+        }
+
+    </table>
+
+    <div id="modal" class="modal fade" role="dialog" />
+</div>
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(inicializaComponentes);
+        function inicializaComponentes() {
+            $("#btnPesq").click(pesquisar);
+            $("#btnExcluir").click(excluir);
+        }
+        function excluir() {
+            var idALuno =
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Delete", "Usuarios","ID" )" });
+        }
+
+
+
+       
+
+        function pesquisar() {
+            var tipoBusca = $("input[type='radio'][name='searchBy']:checked").val();
+            var textoBusca = $("input[type='text']#tbSearch").val();
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("Pesquisar", "Usuarios")",
+                dataType: "text",
+                data: { searchBy: tipoBusca, search: textoBusca },
+                beforeSend: function () {
+                    $("#btnPesq").prop('disabled', true);
+                    $("#trLoadingResults").show();
+                },
+                complete: function () {
+                },
+                success: function (response) {
+                },
+                error: function (response) {
+                }
+            }).done(function (result) {
+                $("#listaUsuario").html(result);
+                $("#btnPesq").prop('disabled', false);
+                $("#trLoadingResults").hide();
+            });
+            return false;
+        }
+
+    </script>
+}
+
+

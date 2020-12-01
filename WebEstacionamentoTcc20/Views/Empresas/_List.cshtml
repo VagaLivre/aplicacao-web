@@ -1,0 +1,156 @@
+﻿@model List<WebEstacionamentoTcc20.Models.Empresa.EmpresaDisplayViewModel>
+<div style="position:relative;">
+    <table id="tableListEventos" class="table table-responsive  table-striped table-hover" style="border-bottom:0;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Codigo")
+                </th>
+                <th>
+                    @Html.DisplayName("Nome")
+                </th>
+                <th>
+                    @Html.DisplayName("Endereco")
+                </th>
+                <th>
+                    @Html.DisplayName("Vagas Disp")
+                </th>
+
+                <th>
+                    @Html.DisplayName("Valor")
+                </th>
+                <th>
+                    @Html.DisplayName("Horario Inicio")
+                </th>
+
+                <th>
+                    @Html.DisplayName("Horario Fim")
+                </th>
+
+
+                <th style="width:5%;">Editar</th>
+                <th style="width:5%;">Remover</th>
+            </tr>
+        </thead>
+        @if (Model == null || Model.Count == 0)
+        {
+            <tbody>
+                <tr class="tableDataDisplay" id="noDataToDisplayInTable">
+                    <td colspan="2">Nenhum resultado para o registro pesquisado.</td>
+                </tr>
+            </tbody>
+
+        }
+        else
+        {
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr class="tableDataDisplay">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmpresaId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NomeFantasia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Endereco)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NDispo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Valor)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Horafi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Horai)
+                        </td>
+
+                        <td style="max-width:5%;">
+                            <a href="@Url.Action("Edit", "Empresas", new { id = item.EmpresaId})" title="Editar">
+                                <span class="glyphicon glyphicon-pencil center-block text-center" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                   <td style="max-width:5%;">
+                            <a href="@Url.Action("Delete", "Empresas", new { id = item.EmpresaId})" title="Remover">
+                                <span class="glyphicon glyphicon-remove-circle center-block text-center" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                @*<tr>
+                        <td colspan="3" id="trLoadingResults" style="border-style:hidden;" hidden>
+                            <img src="~/Content/images/ajax-loader.gif" class="img-responsive imagemLoading" alt="Carregando Registros..." />
+                        </td>
+                    </tr>*@
+            </tbody>
+            @*<tfoot style="border-style:hidden;">
+                    <tr class="no-border">
+                        <td colspan="3" id="PagerTableData" class="no-border">
+                            @Html.PagedListPager(Model, page => Url.Action("Pesquisar", new { page, searchBy = @ViewBag.searchBy, search = @ViewBag.search }), (PagedListRenderOptions)ViewBag.pLRO)
+                        </td>
+                    </tr>
+                </tfoot>*@
+
+        }
+
+    </table>
+
+    <div id="modal" class="modal fade" role="dialog" />
+</div>
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(inicializaComponentes);
+        function inicializaComponentes() {
+            $("#btnPesq").click(pesquisar);
+            $("#btnExcluir").click(excluir);
+        }
+        function excluir() {
+            var idALuno =
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Delete", "Empresas","ID" )" });
+        }
+
+
+
+       
+
+        function pesquisar() {
+            var tipoBusca = $("input[type='radio'][name='searchBy']:checked").val();
+            var textoBusca = $("input[type='text']#tbSearch").val();
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("Pesquisar", "Empresas")",
+                dataType: "text",
+                data: { searchBy: tipoBusca, search: textoBusca },
+                beforeSend: function () {
+                    $("#btnPesq").prop('disabled', true);
+                    $("#trLoadingResults").show();
+                },
+                complete: function () {
+                },
+                success: function (response) {
+                },
+                error: function (response) {
+                }
+            }).done(function (result) {
+                $("#listaEmpresa").html(result);
+                $("#btnPesq").prop('disabled', false);
+                $("#trLoadingResults").hide();
+            });
+            return false;
+        }
+
+    </script>
+}
+
+

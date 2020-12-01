@@ -1,0 +1,24 @@
+﻿@model WebEstacionamentoTcc20.Models.SendCodeViewModel
+@{
+    ViewBag.Title = "Enviar";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = model.UsuarioReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+    @Html.AntiForgeryToken()
+    @Html.Hidden("rememberMe", @model.UsuarioRememberMe)
+    <h4>Enviar código de verificação</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            Selecione o provedor de autenticação de dois fatores:
+            @Html.DropDownListFor(model => model.UsuarioSelectedProvider, model.UsuarioProviders)
+            <input type="submit" value="Enviar" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
