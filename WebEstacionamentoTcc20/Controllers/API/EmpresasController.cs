@@ -8,10 +8,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using WebEstacionamentoTcc20.Classes;
 using WebEstacionamentoTcc20.Models;
 
 namespace WebEstacionamentoTcc20.Controllers.API
@@ -21,8 +19,6 @@ namespace WebEstacionamentoTcc20.Controllers.API
     public class EmpresasController : ApiController
     {
         private ControleContext db = new ControleContext();
-
-
 
         [HttpPost]
         [Route("Pesquisavaga")]
